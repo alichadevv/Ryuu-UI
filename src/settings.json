@@ -1,19 +1,14 @@
 {
-  "name": "Raol Api'S",
-  "version": "v1.0.0",
+  "name": "Ryuu Api'S",
+  "version": "1.0.0",
   "description": "Simple and easy to use API.",
-  "maintenance": {
-    "enabled": false,
-    "gifUrl": "https://raw.githubusercontent.com/raolbyte/xyz/refs/heads/main/public/maintenance.gif"
-  },
   "bannerImage": "/src/banner.jpg",
-  "previewImage": "/src/preview.png",
   "header": {
     "status": "Active!"
   },
   "apiSettings": {
-    "creator": "VGX Team",
-    "apikey": ["vgx-team"]
+    "creator": "Ryuu Izumi",
+    "apikey": ["ryu"]
   },
   "categories": [
     {
@@ -22,22 +17,735 @@
         {
           "name": "LuminAI",
           "desc": "Talk with luminai - Advanced AI assistant",
-          "path": "/ai/luminai?text=",
+          "path": "/ai/luminai?apikey=&text=",
           "status": "ready",
           "params": {
             "text": "Text for luminai to respond to"
+          }
+        },
+          {
+            "name": "OpenAI",
+            "desc": "chat dengan openai",
+            "path": "/ai/openai?apikey=&text=",
+            "status": "ready",
+            "params": {
+              "text": "Text for OpenAI to respond to"
+          }
+        },
+        {
+          "name": "DeepSeek",
+          "desc": "Chat Dengan Deepseek",
+          "path": "/ai/deepseek?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for Deepseek to respond to"
+            }
+        },
+        {
+          "name": "Anya AI",
+          "desc": "Chat dengan anya Forger (Spy x Family)",
+          "path": "/ai/anya?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for anyaAI to respond to"
+          }
+        },
+        {
+          "name": "Hydromind AI",
+          "desc": "For models, you can check mind.hydrooo.web.id",
+          "path": "/ai/hydromind?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for hydromind to respond to"
+          }
+        },
+        {
+          "name": "Itsuki AI",
+          "desc": "Chat dengan Itsuki Nakona",
+          "path": "/ai/itsuki?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for Itsuki to respond to"
+          }
+        },
+        {
+          "name": "Gemini",
+          "decs": "chat dengan Gemini",
+          "path": "/ai/gemini?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": " Text for Gemini to respond to"
+          }
+        },
+        {
+          "name": "Simsimi",
+          "decs": "chat dengan ai Simsimi",
+          "path": "/ai/simsimi?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": " Text for Gemini to respond to"
           }
         }
       ]
     },
     {
-      "name": "Random Images",
+      "name": "OrderKouta",
       "items": [
         {
-          "name": "Blue Archive",
-          "desc": "Get random Blue Archive character images",
-          "path": "/random/ba",
-          "status": "ready"
+          "name": "Create Payment",
+          "desc": "Create qris payment",
+          "path": "/orderkuota/createpayment?apikey=&amount=&codeqr=",
+          "status": "ready",
+          "params": {
+            "text": "Text for Create Payment to response to"
+          }
+        },
+        {
+          "name": "Cek Status",
+          "desc": "Cek Status payment",
+          "path": "/orderkuota/cekstatus?apikey=&merchant=&keyorkut=",
+          "status": "ready",
+          "params": {
+            "text": "Text for Cek Status to response to"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Downloader",
+      "items": [
+        {
+          "name": "Tiktok",
+          "desc": "Tiktok download video",
+          "path": "/download/tiktok?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Tiktok to response to"
+          }
+        },
+        {
+          "name": "Tiktok V2",
+          "desc": "Downloader tiktok v2",
+          "path": "/download/tiktok-v2?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Tiktok V2 to response to"
+          }
+        },
+        {
+          "name": "Capcut",
+          "desc": "Downloader capcut",
+          "path": "/download/capcut?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Capcut to response to"
+          }
+        },
+        {
+          "name": "Douyin",
+          "desc": "Download Douyin",
+          "path": "/download/douyin? apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Douyin to response to"
+          }
+        },
+        {
+          "name": "Spotify",
+          "desc": "Donwload To Music Spotify",
+          "path": "/donwload/spotify? apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Spotify to response to"
+          }
+        },
+        {
+          "name": "XNXX",
+          "desc": "Downloader Video xnxx",
+          "path": "/download/xnxx?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for XNXX to response to"
+          }
+        },
+        {
+          "name": "Instagram",
+          "desc": "Downloader Video reels instagram",
+          "path": "/download/instagram?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Instagram to response to"
+          }
+        },
+        {
+          "name": "Facebook",
+          "desc": "Downloader video facebook",
+          "path": "/download/facebook?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Facebook to response to"
+          }
+        },
+        {
+          "name": "Videy",
+          "desc": "Downloader video videy",
+          "path": "/download/videy?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Videy to response to"
+          }
+        },
+        {
+          "name": "Ytmp4",
+          "desc": "Downloader video YouTube",
+          "path": "/download/ytmp4?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for YouTube MP4 to response to"
+          }
+        },
+        {
+          "name": "Ytmp3",
+          "desc": "Downloader video  menjadi Audio YouTube",
+          "path": "/download/ytmp3?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for YouTube MP3 to response to"
+          }
+        },
+        {
+          "name": "Snackvideo",
+          "desc": "Downloader video Snackvideo",
+          "path": "/download/snackvideo?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for SnackVideo to response to"
+          }
+        },
+        {
+          "name": "Facebook",
+          "desc": "Downloader video facebook",
+          "path": "/download/facebook?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Facebook to response to"
+          }
+        },
+        {
+          "name": "Twitter",
+          "desc": "Downloader Twitter",
+          "path": "/download/twitter?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Twitter to response to"
+          }
+        },
+        {
+          "name": "Terabox",
+          "desc": "Downloader video Terabox",
+          "path": "/download/terabox?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Terabox to response to"
+          }
+        },
+        {
+          "name": "SoundCloud",
+          "desc": "Downloader music to audio soundcloud",
+          "path": "/download/soundcloud?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for SoundCloud to response to"
+          }
+        },
+        {
+          "name": "Youtube",
+          "desc": "Downloader video Youtube",
+          "path": "/download/ytdl?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Youtube to response to"
+          }
+        },
+        {
+          "name": "Youtube V2",
+          "desc": "Downloader video Youtube V2",
+          "path": "/download/youtube-v2?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for YouTube V2 to response to"
+          }
+        },
+        {
+          "name": "Pinterest",
+          "desc": "Downloader Image pinterest",
+          "path": "/download/pinterest?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Pinterest to response to"
+          }
+        },
+        {
+          "name": "Google Drive",
+          "desc": "Downloader File, ZIP, RAR, dll Gdrive",
+          "path": "/download/gdrive?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Google Drive to response to"
+          }
+        },
+        {
+          "name": "Doodstream",
+          "desc": "Downloader video porn +18 doodstream",
+          "path": "/download/doodstream?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Doodstream to response to"
+          }
+        },
+        {
+          "name": "9xBuddy",
+          "desc": "Downloader 9xbuddy",
+          "path": "/download/9xbuddy?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for 9xbuddy to response to"
+          }
+        },
+        {
+          "name": "Aio",
+          "desc": "Downloader aio",
+          "path": "/download/aio?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Aio to response to"
+          }
+        },
+         {
+          "name": "Playspotify",
+          "desc": "download music playspotify",
+          "path": "/download/playspotify?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Playspotify to response to"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Random",
+      "items": [
+        {
+          "name": "Random BlueArchive",
+          "desc": "Random foto blue archive",
+          "path": "/random/ba?apikey=",
+          "status": "ready",
+          "params": {
+            "text": "images for Random BlueArchive to response to"
+          }
+        },
+        {
+          "name": "Random Waifu",
+          "desc": "Random foto waifu",
+          "path": "/random/waifu?apikey=",
+          "status": "ready",
+          "params": {
+            "text": "images for Random Waifu to response to"
+          }
+        },
+        {
+          "name": "Random Nsfw",
+          "desc": "Random foto anime Nsfw",
+          "path": "/random/nsfw?apikey=",
+          "status": "ready",
+          "params": {
+            "text": "images for Random Nsfw to response to"
+          }
+        },
+        {
+          "name": "Pap Ayang",
+          "desc": "Random foto Pap Muka Ayang",
+          "path": "/random/papayang?apikey=",
+          "status": "ready",
+          "params": {
+            "text": "images for Random Papayang to response to"
+          }
+        },
+        {
+          "name": "Random Loli",
+          "desc": "Random anime loli",
+          "path": "/random/loli?apikey=",
+          "status": "ready",
+          "params": {
+            "text": "images for Random Loli to response to"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "items": [
+        {
+          "name": "Youtube Search",
+          "desc": "Search youtube video",
+          "path": "/search/youtube?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for YouTube Search to response to"
+          }
+        },
+        {
+          "name": "Tiktok Search",
+          "desc": "search tiktok video",
+          "path": "/search/tiktok?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Tiktok Search to response to"
+          }
+        },
+        {
+          "name": "Npm Search",
+          "desc": "search npm nodejs",
+          "path": "/search/npm?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Npm Nodejs Search to response to"
+          }
+        },
+        {
+          "name": "Pinterest Search",
+          "desc": "search gambar pinterest",
+          "path": "/search/pinterest?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Pinterest Search to response to"
+          }
+        },
+        {
+          "name": "PlayStore Search",
+          "desc": "search aplikasi  resmi dari playstore",
+          "path": "/search/playstore?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for playstore Search to response to"
+          }
+        },
+        {
+          "name": "Fdroid Search",
+          "desc": "search untuk mencari sebuah aplikasi",
+          "path": "/search/fdroid?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Fdroid Search to response to"
+          }
+        },
+        {
+          "name": "Happymod Search",
+          "desc": "search aplikasi mod, no ads happymod",
+          "path": "/search/happymod?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for HappyMod Search to response to"
+          }
+        },
+        {
+          "name": "Sfile Search",
+          "desc": "search berkas dan lainnya di sfile",
+          "path": "/search/sfile?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Sfile Search to response to"
+          }
+        },
+        {
+          "name": "Lyrics Search",
+          "desc": "search lyrics music",
+          "path": "/search/lyrics?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Lyrics Search to response to"
+          }
+        },
+        {
+          "name": "Google Image",
+          "desc": "search gimage",
+          "path": "/search/gimage?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Google Images Search to response to"
+          }
+        },
+        {
+          "name": "XNXX Search",
+          "desc": "search xnxx video",
+          "path": "/search/xnxx?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for XNXX Search to response to"
+          }
+        },
+        {
+          "name": "Wikipedia",
+          "desc": "Search Information Berita Wikipedia",
+          "path": "/search/wikipedia?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Wiki Search to response to"
+          }
+        },
+        {
+          "name": "Jadwal Sholat",
+          "desc": "Memberikan Waktu Sholat",
+          "path": "/search/jadwalsholat?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Jadwal Sholat Search to response to"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "items": [
+        {
+          "name": "Text-To-Speech",
+          "desc": "Tts character",
+          "path": "/tools/text-to-speech?apikey=&text=&model=",
+          "status": "ready",
+          "params": {
+            "text": "Text and Models for Text To Speech to response to"
+          }
+        },
+        {
+          "name": "Screenshot Web",
+          "desc": "screenshot web url",
+          "path": "/tools/ssweb?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for  Screenshot Website to response to"
+          }
+        },
+        {
+          "name": "Emoji To Gif",
+          "desc": "Convert emoji to gif",
+          "path": "/tools/emojigif?apikey=&emoji=",
+          "status": "ready",
+          "params": {
+            "text": "emoji for Emoji To Gif to response to"
+          }
+        },
+        {
+          "name": "Emoji Mix",
+          "desc": "Emoji Mix converter",
+          "path": "/tools/emojimix?apikey=&emoji1=&emoji2=",
+          "status": "ready",
+          "params": {
+            "text": "emoji1 and emoji2 for Emoji Mix to response to"
+          }
+        },
+        {
+          "name": "Ocr",
+          "desc": "Tools Ocr",
+          "path": "/tools/ocr?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Ocr to response to"
+          }
+        },
+        {
+          "name": "Ngl",
+          "desc": "Tools Ngl",
+          "path": "/tools/ngl?apikey=&text=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Text and Url for Ngl to response to"
+          }
+        }, 
+        {
+          "name": "Carbonfyn V1",
+          "desc": "Tools image Carbonfyn",
+          "path": "/tools/carbonfyn?apikey=&text=", 
+          "status": "ready",
+          "params": {
+            "text": "Text to image for Carbonfyn V1 to response to"
+          }
+        },
+        {
+          "name": "Morse",
+          "desc": "Tools Text Input Morse",
+          "path": "/tools/morse?apikey=&input=",
+          "status": "ready",
+          "params": {
+            "text": "Input for Moser to response to"
+          }
+        },
+        {
+          "name": "Subfinder",
+          "desc": "Tools domain subfinder",
+          "path": "/tools/subfinder?apikey=&q=",
+          "status": "ready",
+          "params": {
+            "text": "Query for Subfinder to response to"
+          }
+        },
+        {
+          "name": "Tulis Buku",
+          "desc": "Tools tulis buku",
+          "path": "/tools/tulisbuku?apikey=&prompt=",
+          "status": "ready",
+          "params": {
+            "text": "Prompt for Tulisbuku to response to"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stalk",
+      "items": [
+        {
+          "name": "Instagram Stalker",
+          "decs": "Stalk instagram account",
+          "path": "/stalk/instagram?apikey=&user=",
+          "status": "ready",
+          "params": {
+            "text": "User for Instagram to response to"
+          }
+        },
+        {
+          "name": "Tiktok Stalker",
+          "decs": "Stalk Tiktok account",
+          "path": "/stalk/tiktok?apikey=&user=",
+          "status": "ready",
+          "params": {
+            "text": "User for Tiktok to response to"
+          }
+        },
+        {
+          "name": "Npm Stalker",
+          "decs": "Stalk Npm account",
+          "path": "/stalk/npm?apikey=&name=",
+          "status": "ready",
+          "params": {
+            "text": "Name for Npm Account to response to"
+          }
+        },
+        {
+          "name": "Github Stalker",
+          "decs": "Stalk github account",
+          "path": "/stalk/github? apikey=&user=",
+          "status": "ready",
+          "params": {
+            "text": "User for Github to response to"
+          }
+        },
+        {
+          "name": "Youtube Stalker",
+          "decs": "Stalk YouTube username",
+          "path": "/stalk/youtube? apikey=&user=",
+          "status": "ready",
+          "params": {
+            "text": "User for Youtube to response to"
+          }
+        },
+        {
+          "name": "Freefire Stalker",
+          "decs": "Stalk Id Freefire",
+          "path": "/stalk/freefire?apikey=&id=",
+          "status": "ready",
+          "params": {
+            "text": "Id for Freefire to response to"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Creator",
+      "items": [
+        {
+          "name": "Remini",
+          "decs": "Remini Image",
+          "path": "/imagecreator/remini?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Remini to response to"
+          }
+        },
+        {
+          "name": "Remove Background",
+          "decs": "Remove background image",
+          "path": "/imagecreator/removbg?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Remove Background to response to"
+          }
+        },
+        {
+          "name": "Upscale",
+          "decs": "Upscale Image",
+          "path": "/imagecreator/upscale?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Upscale to response to"
+          }
+        },
+        {
+          "name": "Colorize",
+          "decs": "Colorize Image",
+          "path": "/imagecreator/colorize?apikey=&url=",
+          "status": "ready",
+          "params": {
+            "text": "Url for Colorize images to response to"
+          }
+        },
+        {
+          "name": "Brat Image",
+          "decs": "Brat Text Generator",
+          "path": "/imagecreator/brat?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for Brat to response to"
+          }
+        },
+        {
+          "name": "Text To Picture",
+          "desc": "Text To Picture image",
+          "path": "/tools/text-to-picture?apikey=&text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for Text To Pictures to response to"
+          }
+        }
+      ]
+    },
+    {
+      "name": "API",
+      "items": [
+        {
+          "name": "Status Api",
+          "decs": "Cek status api",
+          "path": "/api/status",
+          "status": "ready",
+           "params": {
+            "text": "Cek Status Website Api Aktif Atau Tidak Silahkan Cek"
+          }
+        },
+        {
+          "name": "Cek Apikey",
+          "decs": "Cek status API key dengan mengambil data dari endpoint",
+          "path": "/api/cekapikey?apikey=",
+          "status": "ready",
+          "params": {
+            "text": "Cek status API key"
+          }
+        },
+        {
+          "name": "Total Fitur Endpoints",
+          "decs": "Menampilkan total semua fitur di semua kategori",
+          "path": "/api/totalfitur?apikey=",
+          "status": "ready",
+          "params": {
+            "text": "Total Fitur Endpoints"
+          }
         }
       ]
     }
