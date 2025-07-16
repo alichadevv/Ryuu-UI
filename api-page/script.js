@@ -44,124 +44,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   let currentApiData = null // To store API data currently displayed in the modal
   let allNotifications = [] // To store all notifications from JSON
 
-  // --- URL Parameter Functions ---
-  const getUrlParameter = (name) => {
-    const urlParams = new URLSearchParams(window.location.search)
-    return urlParams.get(name)
-  }
-
-  const updateUrlParameter = (key, value) => {
-    const url = new URL(window.location)
-    if (value) {
-      url.searchParams.set(key, value)
-    } else {
-      url.searchParams.delete(key)
-    }
-    window.history.replaceState({}, "", url)
-  }
-
-  const removeUrlParameter = (key) => {
-    const url = new URL(window.location)
-    url.searchParams.delete(key)
-    window.history.replaceState({}, "", url)
-  }
-
-  // --- Share API Functions ---
-  const generateShareLink = (apiData) => {
-    const url = new URL(window.location.origin + window.location.pathname)
-    // Remove parameters from the path before sharing
-    const cleanPath = apiData.path.split("?")[0]
-    url.searchParams.set("share", cleanPath)
-    return url.toString()
-  }
-
-  const parseSharedApiFromUrl = () => {
-    const sharedPath = getUrlParameter("share")
-    return sharedPath || null
-  }
-
-  const findApiByPath = (path) => {
-    if (!settings || !settings.categories) return null
-
-    for (const category of settings.categories) {
-      for (const item of category.items) {
-        // Compare both full path and clean path (without parameters)
-        const itemCleanPath = item.path.split("?")[0]
-        if (item.path === path || itemCleanPath === path) {
-          return {
-            path: item.path,
-            name: item.name,
-            desc: item.desc,
-            params: item.params || null,
-            innerDesc: item.innerDesc || null,
-          }
-        }
-      }
-    }
-    return null
-  }
-
-  const handleShareApi = async () => {
-    if (!currentApiData) return
-
-    const shareLink = generateShareLink(currentApiData)
-
-    try {
-      await navigator.clipboard.writeText(shareLink)
-      showToast("Share link copied to clipboard!", "success", "Share API")
-
-      // Update URL to reflect the shared API
-      // Update URL to reflect the shared API (clean path without parameters)
-      const cleanPath = currentApiData.path.split("?")[0]
-      updateUrlParameter("share", cleanPath)
-    } catch (err) {
-      // Fallback for browsers that don't support clipboard API
-      const textArea = document.createElement("textarea")
-      textArea.value = shareLink
-      document.body.appendChild(textArea)
-      textArea.select()
-      try {
-        document.execCommand("copy")
-        showToast("Share link copied to clipboard!", "success", "Share API")
-        showToast("Share link copied to clipboard!", "success", "Share API")
-        // Update URL to reflect the shared API (clean path without parameters)
-        const cleanPath = currentApiData.path.split("?")[0]
-        updateUrlParameter("share", cleanPath)
-      } catch (fallbackErr) {
-        showToast("Failed to copy share link", "error")
-      }
-      document.body.removeChild(textArea)
-    }
-  }
-
-  const openSharedApi = async (sharedPath) => {
-    // Wait for settings to be loaded
-    if (!settings || !settings.categories) {
-      setTimeout(() => openSharedApi(sharedPath), 100)
-      return
-    }
-
-    // Find the API in settings using the path
-    const apiData = findApiByPath(sharedPath)
-
-    if (!apiData) {
-      showToast("The shared API is no longer available", "error", "Share Link")
-      // Clean up URL parameter
-      removeUrlParameter("share")
-      return
-    }
-
-    // Set current API data and open modal
-    currentApiData = apiData
-    setupModalForApi(currentApiData)
-
-    // Show modal after a short delay to ensure DOM is ready
-    setTimeout(() => {
-      DOM.modal.instance.show()
-      showToast(`Opened shared API: ${apiData.name}`, "info", "Share Link")
-    }, 500)
-  }
-
   // --- Utility Functions ---
   const showToast = (message, type = "info", title = "Notification") => {
     if (!DOM.notificationToast) return
@@ -285,7 +167,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (notificationsToShow.length > 0) {
       notificationsToShow.forEach((notif) => {
-        showToast(notif.message, "notification", `Notification (${new Date(notif.date).toLocaleDateString("en-US")})`)
+        showToast(notif.message, "notification", `Notification (${new Date(notif.date).toLocaleDateString("id-ID")})`)
         addSessionReadNotificationId(notif.id)
       })
     } else {
@@ -310,12 +192,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       populatePageContent()
       renderApiCategories()
       observeApiItems()
-
-      // Check for shared API in URL after everything is loaded
-      const sharedPath = parseSharedApiFromUrl()
-      if (sharedPath) {
-        openSharedApi(sharedPath)
-      }
     } catch (error) {
       console.error("Error loading settings:", error)
       showToast(`Failed to load settings: ${error.message}`, "error")
@@ -378,30 +254,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- Theme Management ---
   const initTheme = () => {
-    // Check URL parameter first
-    const modeParam = getUrlParameter("mode")
-
-    if (modeParam === "dark") {
-      // Force dark mode from URL parameter
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    const savedTheme = localStorage.getItem("darkMode")
+    if (savedTheme === "true" || (savedTheme === null && prefersDark)) {
       DOM.body.classList.add("dark-mode")
       if (DOM.themeToggle) DOM.themeToggle.checked = true
-      localStorage.setItem("darkMode", "true")
-      showToast("Dark mode activated from URL parameter", "info")
-    } else if (modeParam === "light") {
-      // Force light mode from URL parameter
-      DOM.body.classList.remove("dark-mode")
-      if (DOM.themeToggle) DOM.themeToggle.checked = false
-      localStorage.setItem("darkMode", "false")
-      showToast("Light mode activated from URL parameter", "info")
-    } else {
-      // Use saved preference or system preference
-      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-      const savedTheme = localStorage.getItem("darkMode")
-
-      if (savedTheme === "true" || (savedTheme === null && prefersDark)) {
-        DOM.body.classList.add("dark-mode")
-        if (DOM.themeToggle) DOM.themeToggle.checked = true
-      }
     }
   }
 
@@ -409,10 +266,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     DOM.body.classList.toggle("dark-mode")
     const isDarkMode = DOM.body.classList.contains("dark-mode")
     localStorage.setItem("darkMode", isDarkMode)
-
-    // Update URL parameter
-    updateUrlParameter("mode", isDarkMode ? "dark" : "light")
-
     showToast(`Switched to ${isDarkMode ? "dark" : "light"} mode`, "success")
   }
 
@@ -487,15 +340,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!settings || Object.keys(settings).length === 0) return
 
     const currentYear = new Date().getFullYear()
-    const creator = settings.apiSettings?.creator || "Raol Api'S"
+    const creator = settings.apiSettings?.creator || "Ryuu Api'S"
 
-    setPageContent(DOM.pageTitle, settings.name, "Raol Api'S")
-    setPageContent(DOM.wm, `© ${currentYear} Raol Api'S Corp. All rights reversed.`)
-    setPageContent(DOM.appName, settings.name, "Raol Api'S")
+    setPageContent(DOM.pageTitle, settings.name, "Ryuu Api'S")
+    setPageContent(DOM.wm, `© ${currentYear} Ryuu Api'S Corp. All rights reversed.`)
+    setPageContent(DOM.appName, settings.name, "Ryuu Api'S")
     setPageContent(DOM.sideNavName, settings.name || "API")
     setPageContent(DOM.versionBadge, settings.version, "v1.0")
-    setPageContent(DOM.versionHeaderBadge, settings.header?.status, "Active!")
-    setPageContent(DOM.appDescription, settings.description, "Simple and easy to use API documentation.")
+    setPageContent(DOM.versionHeaderBadge, settings.header?.status, "Aktif!")
+    setPageContent(DOM.appDescription, settings.description, "Dokumentasi API simpel dan mudah digunakan.")
 
     // Set banner image
     if (DOM.dynamicImage) {
@@ -775,30 +628,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     DOM.modal.submitBtn.disabled = true
     DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
 
-    // Hide all footer buttons initially
-    const editParamsBtn = DOM.modal.element.querySelector(".edit-params-btn")
-    const downloadImageBtn = DOM.modal.element.querySelector(".download-image-btn")
-    const shareApiBtn = DOM.modal.element.querySelector(".share-api-btn")
-    if (editParamsBtn) editParamsBtn.style.display = "none"
-    if (downloadImageBtn) downloadImageBtn.style.display = "none"
-    if (shareApiBtn) shareApiBtn.style.display = "none"
-
-    // Create share button if it doesn't exist
-    if (!shareApiBtn) {
-      const newShareBtn = document.createElement("button")
-      newShareBtn.className = "btn btn-info me-2 share-api-btn"
-      newShareBtn.innerHTML = '<i class="fas fa-share-alt me-2"></i> Share API'
-      newShareBtn.onclick = handleShareApi
-
-      // Insert the share button in the modal footer
-      const modalFooter = DOM.modal.element.querySelector(".modal-footer")
-      modalFooter.insertBefore(newShareBtn, DOM.modal.submitBtn)
-    }
-
-    // Always show share button when modal opens
-    const shareBtn = DOM.modal.element.querySelector(".share-api-btn")
-    if (shareBtn) shareBtn.style.display = "inline-block"
-
     const paramsFromPath = new URLSearchParams(apiData.path.split("?")[1])
     const paramKeys = Array.from(paramsFromPath.keys())
 
@@ -864,9 +693,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       DOM.modal.queryInputContainer.appendChild(paramContainer)
       DOM.modal.submitBtn.classList.remove("d-none")
-      DOM.modal.submitBtn.disabled = true
-      DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
-
       initializeTooltips(DOM.modal.queryInputContainer)
     } else {
       handleApiRequest(`${window.location.origin}${apiData.path}`, apiData.name)
@@ -932,6 +758,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const apiUrlWithParams = `${window.location.origin}${currentApiData.path.split("?")[0]}?${newParams.toString()}`
     DOM.modal.endpoint.textContent = apiUrlWithParams
 
+    if (DOM.modal.queryInputContainer.firstChild) {
+      DOM.modal.queryInputContainer.firstChild.classList.add("fade-out")
+      setTimeout(() => {
+        if (DOM.modal.queryInputContainer.firstChild) DOM.modal.queryInputContainer.firstChild.style.display = "none"
+      }, 300)
+    }
+
     await handleApiRequest(apiUrlWithParams, currentApiData.name)
   }
 
@@ -961,26 +794,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         img.alt = apiName
         img.className = "response-image img-fluid rounded shadow-sm fade-in"
 
-        // Only add image to content, download button will be in footer
+        const downloadBtn = document.createElement("a")
+        downloadBtn.href = imageUrl
+        downloadBtn.download = `${apiName.toLowerCase().replace(/\s+/g, "-")}.${blob.type.split("/")[1] || "png"}`
+        downloadBtn.className = "btn btn-primary mt-3 w-100"
+        downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i> Download Image'
+
         DOM.modal.content.appendChild(img)
-
-        // Create download button in modal footer
-        let downloadImageBtn = DOM.modal.element.querySelector(".download-image-btn")
-        if (!downloadImageBtn) {
-          downloadImageBtn = document.createElement("a")
-          downloadImageBtn.className = "btn btn-success me-2 download-image-btn"
-          downloadImageBtn.innerHTML = '<i class="fas fa-download me-2"></i> Download Image'
-          downloadImageBtn.style.textDecoration = "none"
-
-          // Insert the download button before the submit button in the modal footer
-          const modalFooter = DOM.modal.element.querySelector(".modal-footer")
-          modalFooter.insertBefore(downloadImageBtn, DOM.modal.submitBtn)
-        }
-
-        // Update download button properties
-        downloadImageBtn.href = imageUrl
-        downloadImageBtn.download = `${apiName.toLowerCase().replace(/\s+/g, "-")}.${blob.type.split("/")[1] || "png"}`
-        downloadImageBtn.style.display = "inline-block"
+        DOM.modal.content.appendChild(downloadBtn)
       } else if (contentType && contentType.includes("application/json")) {
         const data = await response.json()
         const formattedJson = syntaxHighlightJson(JSON.stringify(data, null, 2))
@@ -998,47 +819,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       DOM.modal.container.classList.add("slide-in-bottom")
       showToast(`Successfully retrieved data for ${apiName}`, "success")
 
-      // Show Edit Parameters button in footer if there were parameters
-      if (currentApiData && currentApiData.path.split("?")[1]) {
-        // Check if edit button already exists, if not create it
-        let editParamsBtn = DOM.modal.element.querySelector(".edit-params-btn")
-        if (!editParamsBtn) {
-          editParamsBtn = document.createElement("button")
-          editParamsBtn.className = "btn btn-outline-secondary me-2 edit-params-btn"
-          editParamsBtn.innerHTML = '<i class="fas fa-edit me-2"></i> Edit Parameters'
-          editParamsBtn.onclick = () => {
-            // Show the parameter form again
-            if (DOM.modal.queryInputContainer.firstChild) {
-              DOM.modal.queryInputContainer.firstChild.style.display = ""
-              DOM.modal.queryInputContainer.firstChild.classList.remove("fade-out")
-            }
-            DOM.modal.submitBtn.classList.remove("d-none")
-            DOM.modal.submitBtn.disabled = false
-            DOM.modal.submitBtn.innerHTML =
-              '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
-            // Hide the response container
-            DOM.modal.container.classList.add("d-none")
-            // Hide the edit button and download button
-            editParamsBtn.style.display = "none"
-            const downloadBtn = DOM.modal.element.querySelector(".download-image-btn")
-            if (downloadBtn) downloadBtn.style.display = "none"
-            // Focus on first input
-            const firstInput = DOM.modal.queryInputContainer.querySelector("input")
-            if (firstInput) firstInput.focus()
-          }
-
-          // Insert the edit button before the submit button in the modal footer
-          const modalFooter = DOM.modal.element.querySelector(".modal-footer")
-          modalFooter.insertBefore(editParamsBtn, DOM.modal.submitBtn)
-        }
-        editParamsBtn.style.display = "inline-block"
-      }
-
       // Reset submit button after successful response
       if (DOM.modal.submitBtn) {
         DOM.modal.submitBtn.disabled = false
-        DOM.modal.submitBtn.innerHTML =
-          '<span>Send Again</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
+        DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
       }
     } catch (error) {
       console.error("API Request Error:", error)
@@ -1077,8 +861,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Always reset the submit button state when request completes
       if (DOM.modal.submitBtn) {
         DOM.modal.submitBtn.disabled = false
-        DOM.modal.submitBtn.innerHTML =
-          '<span>Send Again</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
+        DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
 
         // Only hide the submit button if there are no parameters required
         const hasParams = currentApiData && currentApiData.path && currentApiData.path.includes("?")
